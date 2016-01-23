@@ -1,24 +1,47 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerController : MonoBehaviour {
+[System.Serializable]
+public class Boundary
+{
+    public float xMin, xMax, zMin, zMax;
+}
 
-	public float speed;
+public class PlayerController : MonoBehaviour
+{
+    public float tilt;
+    public Boundary boundary;
 
-	private Rigidbody rb;
 
-	void Start ()
-	{
-		rb = GetComponent<Rigidbody>();
-	}
+    private Rigidbody rb;
 
-	void FixedUpdate ()
-	{
-		float moveHorizontal = Input.GetAxis ("Horizontal");
-		float moveVertical = Input.GetAxis ("Vertical");
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
 
-		Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
+    public float velocity = 5.0f;
+    public float speed = 10.0f;
+    public float planeLift = 1.965f;
 
-		rb.AddForce (movement * speed);
-	}
+    public float rollRate = 1.0f ;
+    public float elevatorRate =1.0f;
+     public float rudderRate=1.0f;
+
+
+    void FixedUpdate()
+    {
+
+  
+ 
+
+
+        rb.AddRelativeForce(Vector3.up * velocity * planeLift);
+
+        rb.AddRelativeTorque(0, 0, -Input.GetAxis("Horizontal") * rollRate);
+
+        rb.AddRelativeForce(0, 0, speed);
+
+        rb.AddRelativeTorque(-Input.GetAxis("Vertical") * elevatorRate, 0, 0);
+    }
 }
