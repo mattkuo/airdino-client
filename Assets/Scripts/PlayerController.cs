@@ -20,9 +20,17 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-		IFirebase firebase = Firebase.CreateNew ("https://airdino.firebaseio.com/");
-//		IFirebase player = firebase.Child ("player1");
+		IFirebase firebase = Firebase.CreateNew ("https://airdino.firebaseio.com/player1");
+//		IFirebase gamma = firebase.Child ("gamma");
 
+
+		firebase.Error += (object sender, ErrorEventArgs e) => {
+			Debug.Log("ERROR");
+		};
+
+		firebase.ValueUpdated += (object sender, ChangedEventArgs e) => {
+			Debug.Log ("Valueupdated");
+		};
 
 		firebase.ChildChanged += (object sender, ChangedEventArgs e) => {
 			Debug.Log("Changed");
@@ -34,6 +42,10 @@ public class PlayerController : MonoBehaviour
 
 		firebase.ChildRemoved += (object sender, ChangedEventArgs e) => {
 			Debug.Log("Removed");
+		};
+
+		firebase.ChildMoved += (object sender, ChangedEventArgs e) => {
+			Debug.Log ("ChildMoved");
 		};
 			
 //		player. += (object sender, ChangedEventArgs e) => {
