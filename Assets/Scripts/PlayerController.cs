@@ -50,6 +50,11 @@ public class PlayerController : MonoBehaviour
             //Debug.Log("pitch: "+pitchAxis+" yaw: " +yawAxis +" Roll "+ rollAxis);
              
         });
+	socket.On("speed",(message) =>
+		 {
+			AmbientSpeed = float.Parse (message.data.GetField("speed").ToString());
+		});
+
         socket.On("error", TestError);
         socket.On("close", TestClose);
 
