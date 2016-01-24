@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class LoginButtonClick : MonoBehaviour {
-	IFirebase firebase;
 
 	// Use this for initialization
 	void Start () {

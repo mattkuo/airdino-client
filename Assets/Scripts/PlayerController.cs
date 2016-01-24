@@ -16,47 +16,17 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody rb;
 
+
+	public GameManager gameManager;
+
     // Use this for initialization
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-		IFirebase firebase = Firebase.CreateNew ("https://airdino.firebaseio.com/player1");
-//		IFirebase gamma = firebase.Child ("gamma");
+		rb = this.GetComponent<Rigidbody> ();
+		gameManager = GameObject.Find ("GameManager").GetComponent<GameManager> ();
 
-
-
-		firebase.ValueUpdated += (object sender, ChangedEventArgs e) => {
-			Debug.Log ("Updated");
-		};
-
-		
-		
-
-//		firebase.ChildAdded += (object sender, ChangedEventArgs e) => {
-//			Debug.Log("Added");
-//		};
-//
-//		firebase.ChildRemoved += (object sender, ChangedEventArgs e) => {
-//			Debug.Log("Removed");
-//		};
-//
-//		firebase.Error += (object sender, ErrorEventArgs e) => {
-//			Debug.Log("error");
-//		};
-
-
-			
-//		player. += (object sender, ChangedEventArgs e) => {
-//			
-//			Dictionary<string, object> dict = e.DataSnapshot.DictionaryValue;
-//			Debug.Log(e.DataSnapshot.ToString);
-//
-//			foreach(KeyValuePair<string, object> entry in dict) {
-//				Debug.LogFormat("String: {0} Object: {1}", entry.Key, entry.Value);
-//			}
-//		};
     }
-
+	
  
 
     void FixedUpdate()
@@ -77,4 +47,15 @@ public class PlayerController : MonoBehaviour
         rb.velocity = AddPos * (Time.fixedDeltaTime * AmbientSpeed);
 //        Debug.Log(AddPos * (Time.fixedDeltaTime * AmbientSpeed));
     }
+
+
+	void OnCollisionEnter (Collision col)
+	{
+		Destroy(gameObject);
+		gameManager.enableMainCam ();
+		gameManager.RespawnPlayer ();
+
+	}
+
+
 }
