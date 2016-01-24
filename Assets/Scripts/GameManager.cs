@@ -21,7 +21,9 @@ public class GameManager : MonoBehaviour {
 	void Start () {
 		client = new Client(url);
 
-		client.Opened += (object sender, System.EventArgs e) => {};
+		client.Opened += (object sender, System.EventArgs e) => {	
+			Debug.Log("open socket");
+		};
 		client.Message += SocketMessage;
 		client.SocketConnectionClosed += (object sender, System.EventArgs e) => {};
 		client.Error += (object sender, ErrorEventArgs e) => {};
