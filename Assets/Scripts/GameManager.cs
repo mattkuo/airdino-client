@@ -1,8 +1,7 @@
-﻿using SocketIOClient;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Net.Sockets;
-
+using SocketIO;
 
 public class GameManager : MonoBehaviour {
 
@@ -14,42 +13,19 @@ public class GameManager : MonoBehaviour {
 
 	public GameObject plane1;
 
-	public string url;
-	private Client client;
+
 
 	// Use this for initialization
 	void Start () {
-		client = new Client(url);
-
-		client.Opened += (object sender, System.EventArgs e) => {	
-			Debug.Log("open socket");
-		};
-		client.Message += SocketMessage;
-		client.SocketConnectionClosed += (object sender, System.EventArgs e) => {};
-		client.Error += (object sender, ErrorEventArgs e) => {};
-		
-		client.Connect();
 
 		instP1 ();
-	}
 
-	private void SocketOpened(object sender, MessageEventArgs e) {
-		Debug.Log("open socket");
-	}
+    }
 
-	private void SocketMessage (object sender, MessageEventArgs e) {
-		if ( e!= null && e.Message.Event == "message") {
-			string msg = e.Message.MessageText;
-			Debug.Log(msg);
-		}
-	}
 
-	private void SocketConnectionClosed(object sender, MessageEventArgs e){
-		client.Close ();
-	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 
