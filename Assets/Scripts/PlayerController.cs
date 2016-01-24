@@ -24,17 +24,22 @@ public class PlayerController : MonoBehaviour
 //		IFirebase player = firebase.Child ("player1");
 
 
-		firebase.ChildChanged += (object sender, ChangedEventArgs e) => {
-			Debug.Log("Changed");
+		firebase.ValueUpdated += (object sender, ChangedEventArgs e) => {
+			Debug.Log("Updated");
 		};
 
-		firebase.ChildAdded += (object sender, ChangedEventArgs e) => {
-			Debug.Log("Added");
-		};
+//		firebase.ChildAdded += (object sender, ChangedEventArgs e) => {
+//			Debug.Log("Added");
+//		};
+//
+//		firebase.ChildRemoved += (object sender, ChangedEventArgs e) => {
+//			Debug.Log("Removed");
+//		};
+//
+//		firebase.Error += (object sender, ErrorEventArgs e) => {
+//			Debug.Log("error");
+//		};
 
-		firebase.ChildRemoved += (object sender, ChangedEventArgs e) => {
-			Debug.Log("Removed");
-		};
 			
 //		player. += (object sender, ChangedEventArgs e) => {
 //			
